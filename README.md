@@ -1,12 +1,15 @@
-# Simple Keyring [![CircleCI](https://circleci.com/gh/MetaMask/eth-simple-keyring.svg?style=svg)](https://circleci.com/gh/MetaMask/eth-simple-keyring)
+# MOAC Keyring [![CircleCI](https://circleci.com/gh/MetaMask/eth-simple-keyring.svg?style=svg)](https://circleci.com/gh/MetaMask/eth-simple-keyring)
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/MetaMask/eth-simple-keyring.svg)](https://greenkeeper.io/)
 
 A simple JS class wrapped around [ethereumjs-wallet](https://github.com/ethereumjs/ethereumjs-wallet) designed to expose an interface common to many different signing strategies to be used in a `KeyringController`; such as the one used in [MetaMask](https://metamask.io/)
 
+
 ## The Keyring Class Protocol
 
 One of the goals of this class is to allow developers to easily add new signing strategies to MetaMask. We call these signing strategies Keyrings, because they can manage multiple keys.
+
+Implemented for MOAC project
 
 ### Keyring.type
 
@@ -58,6 +61,8 @@ transaction.sign(privateKey)
 ```
 
 You must return a valid signed ethereumjs-tx (https://github.com/ethereumjs/ethereumjs-tx) object when complete, it can be the same transaction you received.
+
+For MOAC project, this changed to return a HEX string instead of the object. 
 
 ### signMessage(address, data)
 

@@ -1,6 +1,6 @@
-var SimpleKeyring = require('./')
+var MoacKeyring = require('./')
 
-var keyring = new SimpleKeyring()
+var keyring = new MoacKeyring()
 
 let accounts = []
 keyring.addAccounts(37)

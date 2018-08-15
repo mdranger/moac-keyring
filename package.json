@@ -1,7 +1,7 @@
 {
-  "name": "eth-simple-keyring",
-  "version": "1.2.2",
-  "description": "A simple standard interface for a series of Ethereum private keys.",
+  "name": "moac-keyring",
+  "version": "0.1.0",
+  "description": "A simple standard interface for a series of Ethereum private keys with MOAC signing function.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -12,16 +12,18 @@
   },
   "keywords": [
     "ethereum",
+    "moac",
     "keyring"
   ],
   "author": "Dan Finlay",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MetaMask/eth-simple-keyring/issues"
+    "url": "https://github.com/mdranger/eth-simple-keyring/issues"
   },
-  "homepage": "https://github.com/MetaMask/eth-simple-keyring#readme",
+  "homepage": "https://github.com/mdranger/eth-simple-keyring#readme",
   "dependencies": {
     "eth-sig-util": "^1.4.2",
+    "ethereumjs-abi": "^0.6.5",
     "ethereumjs-util": "^5.1.1",
     "ethereumjs-wallet": "^0.6.0",
     "events": "^1.1.1",

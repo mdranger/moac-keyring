@@ -3,7 +3,7 @@ const ethUtil = require('ethereumjs-util')
 const sigUtil = require('eth-sig-util')
 const SimpleKeyring = require('../')
 
-const TYPE_STR = 'Simple Key Pair'
+const TYPE_STR = 'MOAC Key Pair'
 
 // Sample account:
 const testAccount = {
@@ -11,7 +11,7 @@ const testAccount = {
   address: '0x01560cd3bac62cc6d7e6380600d9317363400896',
 }
 
-describe('simple-keyring', () => {
+describe('-keyring', () => {
 
   let keyring
   beforeEach(() => {
