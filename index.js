@@ -4,9 +4,9 @@ const ethUtil = require('ethereumjs-util')
 const type = 'MOAC Key Pair'
 const sigUtil = require('eth-sig-util')
 
-//debug only
-const assert = require('assert')
-
+/*
+ *
+*/
 class MoacKeyring extends EventEmitter {
 
   /* PUBLIC METHODS */
@@ -170,41 +170,16 @@ class MoacKeyring extends EventEmitter {
                 "0x",
                 "0x"]);
 
-/*Debugging codes:
-            var r1 = ethUtil.bufferToHex(rlpEncoded);
-
-            var r2 = "0xef6c80840bebc200834c4b4094d814f2ac2c4ca49b33066582e4e97ebae02f2ab988115dd030eb169800008080658080"
-                      // 0xf149808477359400834c4b4094d814f2ac2c4ca49b33066582e4e97ebae02f2ab988115dd030eb1698000000808201018080
-            console.log("rlpEncoded:", r1);
-            for(var i = 0; i < r1.length; i++){
-              if (r1[i] != r2[i])
-                console.log(i,":",r1[i]," vs ", r2[i])
-            }
-
-        // assert.equal(r1, r2)
-        */
 
             var hash = ethUtil.keccak256(rlpEncoded);// Hash.keccak256(rlpEncoded);
-
-/*
-            console.log("hash:", ethUtil.bufferToHex(hash),"\n========================\n");
-            // console.log("hash2:", ethUtil.keccak256(r2));
-var hash2 = "0x12a559d9eae4f7c8cacd256ce8dcb473b3e8dbb48a17d5346dbd1e9fe0454efd";
-assert.equal(ethUtil.bufferToHex(hash), hash2);
-console.log("HASH passed.............!");
-
-
- // privateKey = "c75a5f85ef779dcf95c651612efb3c3b9a6dfafb1bb5375905454d9fc8be8a6b";
-//             console.log("Sign:", privateKeyStr);
-*/
             // for MOAC, keep 9 fields instead of 6
             var vPos = 9;
             //Sign the hash with the private key to produce the
             //V, R, S
             var newsign = ethUtil.ecsign(hash, privateKey);// ethUtil.stripHexPrefix(privateKey));
-            console.log("newsign r:", newsign.r);//ethUtil.bufferToHex(newsign));
-            console.log("newsign s:", newsign.s);
-            console.log("newsign v:", newsign.v);
+            // console.log("newsign r:", newsign.r);//ethUtil.bufferToHex(newsign));
+            // console.log("newsign s:", newsign.s);
+            // console.log("newsign v:", newsign.v);
             var rawTx = ethUtil.rlp.decode(rlpEncoded).slice(0,vPos+3);
 
             //Replace the V field with chainID info

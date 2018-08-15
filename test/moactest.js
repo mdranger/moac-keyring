@@ -17,7 +17,7 @@ describe('moac-keyring', () => {
   beforeEach(() => {
     keyring = new MoacKeyring()
   })
-/*
+
   describe('Keyring.type', () => {
     it('is a class property that returns the type string.', () => {
       const type = MoacKeyring.type
@@ -57,10 +57,10 @@ describe('moac-keyring', () => {
       assert.deepEqual(accounts, [testAccount.address], 'accounts match expected')
     })
   })
-*/
+
 
 /*
-
+Main test to send Raw transaction to MOAC network
 txParams
 from
 :
