@@ -72,6 +72,69 @@ class MoacKeyring extends EventEmitter {
  *                  mc.sendRawTransaction
  * 
  * 
+  eth-keyring-controller
+  // SIGNING METHODS
+  //
+  // This method signs tx and returns a promise for
+  // TX Manager to update the state after signing
+
+  signTransaction (ethTx, _fromAddress) {
+    const fromAddress = normalizeAddress(_fromAddress)
+    return this.getKeyringForAccount(fromAddress)
+    .then((keyring) => {
+      return keyring.signTransaction(fromAddress, ethTx)
+    })
+  }
+  simple-eth-keyring
+
+    // tx is an instance of the ethereumjs-transaction class.
+  signTransaction (address, tx) {
+    const wallet = this._getWalletForAccount(address)
+    var privKey = wallet.getPrivateKey()
+    tx.sign(privKey)
+    return Promise.resolve(tx)
+  }
+
+  ethereumjs-tx class
+  // sign a transaction with a given a private key
+  // @param {Buffer} privateKey
+   
+  sign (privateKey) {
+    const msgHash = this.hash(false)
+    const sig = ethUtil.ecsign(msgHash, privateKey)
+    if (this._chainId > 0) {
+      sig.v += this._chainId * 2 + 8
+    }
+    Object.assign(this, sig)
+  }
+
+   * Computes a sha3-256 hash of the serialized tx
+   * @param {Boolean} [includeSignature=true] whether or not to inculde the signature
+   * @return {Buffer}
+  hash (includeSignature) {
+    ......
+    // create hash
+    return ethUtil.rlphash(items)
+    }
+
+  const ethUtil = require('ethereumjs-util') class
+
+  
+    exports.rlphash = function (a) {
+  return exports.sha3(rlp.encode(a))
+}
+
+exports.ecsign = function (msgHash, privateKey) {
+  var sig = secp256k1.sign(msgHash, privateKey)
+
+  var ret = {}
+  ret.r = sig.signature.slice(0, 32)
+  ret.s = sig.signature.slice(32, 64)
+  ret.v = sig.recovery + 27
+  return ret
+}
+
+
 */
   // tx is a RAW TX, return a HEX string of signed data.
   signTransaction (address, tx) {
@@ -108,13 +171,14 @@ class MoacKeyring extends EventEmitter {
             //Make sure all the number fields are in HEX format
 
             var transaction = tx;
+            transaction.nonce = tx.nonce;
             transaction.to = tx.to || '0x';//Can be zero, for contract creation
             transaction.data = tx.data || '0x';//can be zero for general TXs
             transaction.value = tx.value || '0x';//can be zero for contract call
             transaction.chainId = ethUtil.intToHex(tx.chainId);
-            transaction.shardingFlag = '0x';//ethUtil.intToHex(tx.shardingFlag);
+            transaction.shardingFlag = '0x' || ethUtil.intToHex(tx.shardingFlag);
             transaction.systemContract = '0x';//System contract flag, always = 0
-            transaction.via = tx.via || '0x'; //Sharding subchain address
+            transaction.via = tx.via || '0x'; //VNODE proxy benefit address
 
 // console.log("TX:",transaction);
 // for (var property in transaction) {
